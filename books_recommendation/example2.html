@@ -1,0 +1,80 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>None</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 760px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": "Los mitos griegos I.", "label": "Los mitos griegos I.", "shape": "dot", "size": 10, "title": "Los mitos griegos I."}, {"id": "Antolog\u00eda Palatina I", "label": "Antolog\u00eda Palatina I", "shape": "dot", "size": 10, "title": "Antolog\u00eda Palatina I"}, {"id": "La historia de Genji", "label": "La historia de Genji", "shape": "dot", "size": 10, "title": "La historia de Genji"}, {"id": "Decamer\u00f3n", "label": "Decamer\u00f3n", "shape": "dot", "size": 10, "title": "Decamer\u00f3n"}, {"id": "Taiko", "label": "Taiko", "shape": "dot", "size": 10, "title": "Taiko"}, {"id": "Hel\u00e9nicas", "label": "Hel\u00e9nicas", "shape": "dot", "size": 10, "title": "Hel\u00e9nicas"}, {"id": "El libro de las tierras v\u00edrgines", "label": "El libro de las tierras v\u00edrgines", "shape": "dot", "size": 10, "title": "El libro de las tierras v\u00edrgines"}, {"id": "Cuentos esenciales", "label": "Cuentos esenciales", "shape": "dot", "size": 10, "title": "Cuentos esenciales"}, {"id": "Desarrolla una mente prodigiosa", "label": "Desarrolla una mente prodigiosa", "shape": "dot", "size": 10, "title": "Desarrolla una mente prodigiosa"}, {"id": "El molino del Floss", "label": "El molino del Floss", "shape": "dot", "size": 10, "title": "El molino del Floss"}, {"id": "A este lado del para\u00edso", "label": "A este lado del para\u00edso", "shape": "dot", "size": 10, "title": "A este lado del para\u00edso"}, {"id": "La educaci\u00f3n sentimental", "label": "La educaci\u00f3n sentimental", "shape": "dot", "size": 10, "title": "La educaci\u00f3n sentimental"}, {"id": "Starship troopers", "label": "Starship troopers", "shape": "dot", "size": 10, "title": "Starship troopers"}, {"id": "Retorno a Brideshead", "label": "Retorno a Brideshead", "shape": "dot", "size": 10, "title": "Retorno a Brideshead"}, {"id": "La Casa de Dios", "label": "La Casa de Dios", "shape": "dot", "size": 10, "title": "La Casa de Dios"}, {"id": "Caballos desbocados", "label": "Caballos desbocados", "shape": "dot", "size": 10, "title": "Caballos desbocados"}]);
+        edges = new vis.DataSet([{"common_terms": "Los mitos griegos I.", "from": "Los mitos griegos I.", "to": "Antolog\u00eda Palatina I", "weight": 0.2629979919283644}, {"common_terms": "La historia de Genji", "from": "Los mitos griegos I.", "to": "La historia de Genji", "weight": 0.3634390810094573}, {"common_terms": "Decamer\u00f3n", "from": "Los mitos griegos I.", "to": "Decamer\u00f3n", "weight": 0.3599099911937961}, {"common_terms": "Taiko", "from": "Los mitos griegos I.", "to": "Taiko", "weight": 0.31157926235795386}, {"common_terms": "Los mitos griegos I.", "from": "Los mitos griegos I.", "to": "Hel\u00e9nicas", "weight": 0.25010663451100457}, {"common_terms": "El libro de las tierras v\u00edrgines", "from": "Antolog\u00eda Palatina I", "to": "El libro de las tierras v\u00edrgines", "weight": 0.26271480159877403}, {"common_terms": "Antolog\u00eda Palatina I", "from": "Antolog\u00eda Palatina I", "to": "Hel\u00e9nicas", "weight": 0.25694619254367024}, {"common_terms": "Decamer\u00f3n", "from": "Antolog\u00eda Palatina I", "to": "Decamer\u00f3n", "weight": 0.2196369725723445}, {"common_terms": "Cuentos esenciales", "from": "Antolog\u00eda Palatina I", "to": "Cuentos esenciales", "weight": 0.21638754322768106}, {"common_terms": "Desarrolla una mente prodigiosa", "from": "Antolog\u00eda Palatina I", "to": "Desarrolla una mente prodigiosa", "weight": 0.21361334880295132}, {"common_terms": "El molino del Floss", "from": "Antolog\u00eda Palatina I", "to": "El molino del Floss", "weight": 0.21225718310213534}, {"common_terms": "Taiko", "from": "Antolog\u00eda Palatina I", "to": "Taiko", "weight": 0.21209858205987053}, {"common_terms": "Cuentos esenciales", "from": "El libro de las tierras v\u00edrgines", "to": "Cuentos esenciales", "weight": 0.4486460121197357}, {"common_terms": "El molino del Floss", "from": "El libro de las tierras v\u00edrgines", "to": "El molino del Floss", "weight": 0.4167779922540059}, {"common_terms": "A este lado del para\u00edso", "from": "El libro de las tierras v\u00edrgines", "to": "A este lado del para\u00edso", "weight": 0.3921546142761472}, {"common_terms": "Taiko", "from": "Hel\u00e9nicas", "to": "Taiko", "weight": 0.301983639642634}, {"common_terms": "Cuentos esenciales", "from": "Decamer\u00f3n", "to": "Cuentos esenciales", "weight": 0.4043126071362319}, {"common_terms": "La historia de Genji", "from": "Decamer\u00f3n", "to": "La historia de Genji", "weight": 0.3973888692373011}, {"common_terms": "El molino del Floss", "from": "Decamer\u00f3n", "to": "El molino del Floss", "weight": 0.3927149307514696}, {"common_terms": "Cuentos esenciales", "from": "Cuentos esenciales", "to": "El molino del Floss", "weight": 0.5452599520297596}, {"common_terms": "La educaci\u00f3n sentimental", "from": "Cuentos esenciales", "to": "La educaci\u00f3n sentimental", "weight": 0.5336033854742519}, {"common_terms": "Cuentos esenciales", "from": "Cuentos esenciales", "to": "Taiko", "weight": 0.5079684270428338}, {"common_terms": "El molino del Floss", "from": "Desarrolla una mente prodigiosa", "to": "El molino del Floss", "weight": 0.27550621352034005}, {"common_terms": "Starship troopers", "from": "Desarrolla una mente prodigiosa", "to": "Starship troopers", "weight": 0.27178902570580565}, {"common_terms": "Retorno a Brideshead", "from": "Desarrolla una mente prodigiosa", "to": "Retorno a Brideshead", "weight": 0.2639081942367965}, {"common_terms": "La Casa de Dios", "from": "El molino del Floss", "to": "La Casa de Dios", "weight": 0.5268787095992262}, {"common_terms": "A este lado del para\u00edso", "from": "El molino del Floss", "to": "A este lado del para\u00edso", "weight": 0.4984602778073858}, {"common_terms": "La historia de Genji", "from": "Taiko", "to": "La historia de Genji", "weight": 0.5614500386034145}, {"common_terms": "Caballos desbocados", "from": "Taiko", "to": "Caballos desbocados", "weight": 0.5458786642645186}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {"edges": {"color": {"inherit": true}, "smooth": false}, "interaction": {"navigationButtons": true}, "physics": {"minVelocity": 0.75, "solver": "repulsion"}};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

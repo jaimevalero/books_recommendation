@@ -1,0 +1,80 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>None</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 760px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": "El nacimiento de los Estados Unidos (1763-1816)", "label": "El nacimiento de los Estados Unidos (1763-1816)", "shape": "dot", "size": 10, "title": "El nacimiento de los Estados Unidos (1763-1816)"}, {"id": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "label": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "shape": "dot", "size": 10, "title": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil"}, {"id": "La formaci\u00f3n de Am\u00e9rica del Norte", "label": "La formaci\u00f3n de Am\u00e9rica del Norte", "shape": "dot", "size": 10, "title": "La formaci\u00f3n de Am\u00e9rica del Norte"}, {"id": "Los Estados Unidos desde el final de la Guerra Civil hasta la Primera Guerra Mundial", "label": "Los Estados Unidos desde el final de la Guerra Civil hasta la Primera Guerra Mundial", "shape": "dot", "size": 10, "title": "Los Estados Unidos desde el final de la Guerra Civil hasta la Primera Guerra Mundial"}, {"id": "Nuevos enigmas hist\u00f3ricos al descubierto", "label": "Nuevos enigmas hist\u00f3ricos al descubierto", "shape": "dot", "size": 10, "title": "Nuevos enigmas hist\u00f3ricos al descubierto"}, {"id": "Taiko", "label": "Taiko", "shape": "dot", "size": 10, "title": "Taiko"}, {"id": "El libro negro", "label": "El libro negro", "shape": "dot", "size": 10, "title": "El libro negro"}, {"id": "Todo lo que debe saber sobre la Segunda Guerra Mundial", "label": "Todo lo que debe saber sobre la Segunda Guerra Mundial", "shape": "dot", "size": 10, "title": "Todo lo que debe saber sobre la Segunda Guerra Mundial"}, {"id": "Caballos desbocados", "label": "Caballos desbocados", "shape": "dot", "size": 10, "title": "Caballos desbocados"}, {"id": "Mitos y falacias de la historia de Espa\u00f1a", "label": "Mitos y falacias de la historia de Espa\u00f1a", "shape": "dot", "size": 10, "title": "Mitos y falacias de la historia de Espa\u00f1a"}, {"id": "La guerra que gan\u00f3 Franco", "label": "La guerra que gan\u00f3 Franco", "shape": "dot", "size": 10, "title": "La guerra que gan\u00f3 Franco"}, {"id": "Historia de Rusia en el siglo XX", "label": "Historia de Rusia en el siglo XX", "shape": "dot", "size": 10, "title": "Historia de Rusia en el siglo XX"}, {"id": "La historia de Genji", "label": "La historia de Genji", "shape": "dot", "size": 10, "title": "La historia de Genji"}, {"id": "Cuentos esenciales", "label": "Cuentos esenciales", "shape": "dot", "size": 10, "title": "Cuentos esenciales"}, {"id": "Todo fluye", "label": "Todo fluye", "shape": "dot", "size": 10, "title": "Todo fluye"}, {"id": "Aquellos hombres grises", "label": "Aquellos hombres grises", "shape": "dot", "size": 10, "title": "Aquellos hombres grises"}, {"id": "El molino del Floss", "label": "El molino del Floss", "shape": "dot", "size": 10, "title": "El molino del Floss"}]);
+        edges = new vis.DataSet([{"common_terms": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "from": "El nacimiento de los Estados Unidos (1763-1816)", "to": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "weight": 0.6470207276416664}, {"common_terms": "El nacimiento de los Estados Unidos (1763-1816)", "from": "El nacimiento de los Estados Unidos (1763-1816)", "to": "La formaci\u00f3n de Am\u00e9rica del Norte", "weight": 0.6073280047322157}, {"common_terms": "El nacimiento de los Estados Unidos (1763-1816)", "from": "El nacimiento de los Estados Unidos (1763-1816)", "to": "Los Estados Unidos desde el final de la Guerra Civil hasta la Primera Guerra Mundial", "weight": 0.4273368939444524}, {"common_terms": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "from": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "to": "La formaci\u00f3n de Am\u00e9rica del Norte", "weight": 0.5865650176740931}, {"common_terms": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "from": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "to": "Los Estados Unidos desde el final de la Guerra Civil hasta la Primera Guerra Mundial", "weight": 0.4450868607894918}, {"common_terms": "Nuevos enigmas hist\u00f3ricos al descubierto", "from": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "to": "Nuevos enigmas hist\u00f3ricos al descubierto", "weight": 0.32557836067493484}, {"common_terms": "Taiko", "from": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "to": "Taiko", "weight": 0.32157993062976875}, {"common_terms": "El libro negro", "from": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "to": "El libro negro", "weight": 0.2999422382765289}, {"common_terms": "Todo lo que debe saber sobre la Segunda Guerra Mundial", "from": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "to": "Todo lo que debe saber sobre la Segunda Guerra Mundial", "weight": 0.28757325422357427}, {"common_terms": "Caballos desbocados", "from": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "to": "Caballos desbocados", "weight": 0.27487950619496404}, {"common_terms": "La formaci\u00f3n de Am\u00e9rica del Norte", "from": "La formaci\u00f3n de Am\u00e9rica del Norte", "to": "Los Estados Unidos desde el final de la Guerra Civil hasta la Primera Guerra Mundial", "weight": 0.4268118398264974}, {"common_terms": "Mitos y falacias de la historia de Espa\u00f1a", "from": "Nuevos enigmas hist\u00f3ricos al descubierto", "to": "Mitos y falacias de la historia de Espa\u00f1a", "weight": 0.5401863779656337}, {"common_terms": "La guerra que gan\u00f3 Franco", "from": "Nuevos enigmas hist\u00f3ricos al descubierto", "to": "La guerra que gan\u00f3 Franco", "weight": 0.5270937267122462}, {"common_terms": "Historia de Rusia en el siglo XX", "from": "Nuevos enigmas hist\u00f3ricos al descubierto", "to": "Historia de Rusia en el siglo XX", "weight": 0.4428278799278893}, {"common_terms": "La historia de Genji", "from": "Taiko", "to": "La historia de Genji", "weight": 0.5614500386034145}, {"common_terms": "Taiko", "from": "Taiko", "to": "Caballos desbocados", "weight": 0.5458786642645186}, {"common_terms": "Cuentos esenciales", "from": "Taiko", "to": "Cuentos esenciales", "weight": 0.5079684270428338}, {"common_terms": "El libro negro", "from": "El libro negro", "to": "Todo lo que debe saber sobre la Segunda Guerra Mundial", "weight": 0.4986747006337008}, {"common_terms": "Historia de Rusia en el siglo XX", "from": "El libro negro", "to": "Historia de Rusia en el siglo XX", "weight": 0.427703840988112}, {"common_terms": "Todo fluye", "from": "El libro negro", "to": "Todo fluye", "weight": 0.4266347706275365}, {"common_terms": "Historia de Rusia en el siglo XX", "from": "Todo lo que debe saber sobre la Segunda Guerra Mundial", "to": "Historia de Rusia en el siglo XX", "weight": 0.4456347119181956}, {"common_terms": "Aquellos hombres grises", "from": "Todo lo que debe saber sobre la Segunda Guerra Mundial", "to": "Aquellos hombres grises", "weight": 0.4138875864766417}, {"common_terms": "El molino del Floss", "from": "Caballos desbocados", "to": "El molino del Floss", "weight": 0.4699082182984131}, {"common_terms": "Cuentos esenciales", "from": "Caballos desbocados", "to": "Cuentos esenciales", "weight": 0.4609956355685213}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {"edges": {"color": {"inherit": true}, "smooth": false}, "interaction": {"navigationButtons": true}, "physics": {"minVelocity": 0.75, "solver": "repulsion"}};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
