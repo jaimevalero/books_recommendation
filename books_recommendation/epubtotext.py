@@ -57,8 +57,14 @@ def thtml2ttext(thtml):
     Output = []
     for html in thtml:
         text =  chap2text(html)
+        # Remove accents
+        a,b = 'áéíóúü','aeiouu'
+        trans = str.maketrans(a,b)
+        text = text.lower().translate(trans)
         Output.append(text)
     return Output
+
+
 
 def epub2text(epub_path):
     chapters = epub2thtml(epub_path)

@@ -103,7 +103,7 @@ ENV/
 
 # IDE settings
 .vscode/
-
+*csv
 books/*epubbooks.csv
 books
 books_recommendation/stemmized.csv

@@ -28,9 +28,8 @@ def get_df_books():
     df = pd.DataFrame(ebooks_array)   
     return df
 
-#df = get_df_books()
-#df.head(2)
-#df.to_csv("books.csv")
-#print("fin")
+df = get_df_books()
+df.to_csv("books.csv")
 
-df = pd.read_csv("books.csv")
+
+#

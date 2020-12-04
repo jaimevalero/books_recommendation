@@ -73,6 +73,12 @@ docs: ## generate Sphinx HTML documentation, including API docs
 servedocs: docs ## compile the docs watching for changes
 	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
 
+generatecsv: ## Generate csv
+	python -m books_recommendation.books_recommendation
+
+generatedistances: generatecsv ## Generate and distances
+	python -m books_recommendation.texttograph
+
 release: dist ## package and upload a release
 	twine upload dist/*
 

@@ -1,0 +1,80 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>None</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 760px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": "El nacimiento de los Estados Unidos (1763-1816)", "label": "El nacimiento de los Estados Unidos (1763-1816)", "shape": "dot", "size": 10, "title": "El nacimiento de los Estados Unidos (1763-1816)"}, {"id": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "label": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "shape": "dot", "size": 10, "title": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil"}, {"id": "La formaci\u00f3n de Am\u00e9rica del Norte", "label": "La formaci\u00f3n de Am\u00e9rica del Norte", "shape": "dot", "size": 10, "title": "La formaci\u00f3n de Am\u00e9rica del Norte"}, {"id": "Los Estados Unidos desde el final de la Guerra Civil hasta la Primera Guerra Mundial", "label": "Los Estados Unidos desde el final de la Guerra Civil hasta la Primera Guerra Mundial", "shape": "dot", "size": 10, "title": "Los Estados Unidos desde el final de la Guerra Civil hasta la Primera Guerra Mundial"}, {"id": "Benjamin Franklin", "label": "Benjamin Franklin", "shape": "dot", "size": 10, "title": "Benjamin Franklin"}, {"id": "Nuevos enigmas hist\u00f3ricos al descubierto", "label": "Nuevos enigmas hist\u00f3ricos al descubierto", "shape": "dot", "size": 10, "title": "Nuevos enigmas hist\u00f3ricos al descubierto"}, {"id": "Todo lo que debe saber sobre la Segunda Guerra Mundial", "label": "Todo lo que debe saber sobre la Segunda Guerra Mundial", "shape": "dot", "size": 10, "title": "Todo lo que debe saber sobre la Segunda Guerra Mundial"}, {"id": "La guerra que gan\u00f3 Franco", "label": "La guerra que gan\u00f3 Franco", "shape": "dot", "size": 10, "title": "La guerra que gan\u00f3 Franco"}, {"id": "Historia de Rusia en el siglo XX", "label": "Historia de Rusia en el siglo XX", "shape": "dot", "size": 10, "title": "Historia de Rusia en el siglo XX"}, {"id": "Mitos y falacias de la historia de Espa\u00f1a", "label": "Mitos y falacias de la historia de Espa\u00f1a", "shape": "dot", "size": 10, "title": "Mitos y falacias de la historia de Espa\u00f1a"}, {"id": "El libro negro de la humanidad", "label": "El libro negro de la humanidad", "shape": "dot", "size": 10, "title": "El libro negro de la humanidad"}, {"id": "El libro negro", "label": "El libro negro", "shape": "dot", "size": 10, "title": "El libro negro"}]);
+        edges = new vis.DataSet([{"common_terms": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "from": "El nacimiento de los Estados Unidos (1763-1816)", "to": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "weight": 0.6624281904190703}, {"common_terms": "El nacimiento de los Estados Unidos (1763-1816)", "from": "El nacimiento de los Estados Unidos (1763-1816)", "to": "La formaci\u00f3n de Am\u00e9rica del Norte", "weight": 0.5563000747743523}, {"common_terms": "El nacimiento de los Estados Unidos (1763-1816)", "from": "El nacimiento de los Estados Unidos (1763-1816)", "to": "Los Estados Unidos desde el final de la Guerra Civil hasta la Primera Guerra Mundial", "weight": 0.4658849697539238}, {"common_terms": "El nacimiento de los Estados Unidos (1763-1816)", "from": "El nacimiento de los Estados Unidos (1763-1816)", "to": "Benjamin Franklin", "weight": 0.34661583351674685}, {"common_terms": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "from": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "to": "La formaci\u00f3n de Am\u00e9rica del Norte", "weight": 0.5086461842535022}, {"common_terms": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "from": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "to": "Los Estados Unidos desde el final de la Guerra Civil hasta la Primera Guerra Mundial", "weight": 0.472130305088907}, {"common_terms": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "from": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "to": "Benjamin Franklin", "weight": 0.3261660157877469}, {"common_terms": "Nuevos enigmas hist\u00f3ricos al descubierto", "from": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "to": "Nuevos enigmas hist\u00f3ricos al descubierto", "weight": 0.3129351057605484}, {"common_terms": "Todo lo que debe saber sobre la Segunda Guerra Mundial", "from": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "to": "Todo lo que debe saber sobre la Segunda Guerra Mundial", "weight": 0.2800473704237896}, {"common_terms": "La guerra que gan\u00f3 Franco", "from": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "to": "La guerra que gan\u00f3 Franco", "weight": 0.2561848334671553}, {"common_terms": "Historia de Rusia en el siglo XX", "from": "Los Estados Unidos Desde 1816 Hasta La Guerra Civil", "to": "Historia de Rusia en el siglo XX", "weight": 0.2417213831679871}, {"common_terms": "La formaci\u00f3n de Am\u00e9rica del Norte", "from": "La formaci\u00f3n de Am\u00e9rica del Norte", "to": "Los Estados Unidos desde el final de la Guerra Civil hasta la Primera Guerra Mundial", "weight": 0.41861598668321504}, {"common_terms": "La formaci\u00f3n de Am\u00e9rica del Norte", "from": "La formaci\u00f3n de Am\u00e9rica del Norte", "to": "Benjamin Franklin", "weight": 0.3427671844976682}, {"common_terms": "Mitos y falacias de la historia de Espa\u00f1a", "from": "Nuevos enigmas hist\u00f3ricos al descubierto", "to": "Mitos y falacias de la historia de Espa\u00f1a", "weight": 0.4778812229786866}, {"common_terms": "Nuevos enigmas hist\u00f3ricos al descubierto", "from": "Nuevos enigmas hist\u00f3ricos al descubierto", "to": "La guerra que gan\u00f3 Franco", "weight": 0.4647619542802198}, {"common_terms": "Nuevos enigmas hist\u00f3ricos al descubierto", "from": "Nuevos enigmas hist\u00f3ricos al descubierto", "to": "Historia de Rusia en el siglo XX", "weight": 0.4260714833763811}, {"common_terms": "El libro negro de la humanidad", "from": "Todo lo que debe saber sobre la Segunda Guerra Mundial", "to": "El libro negro de la humanidad", "weight": 0.4586693829220229}, {"common_terms": "Todo lo que debe saber sobre la Segunda Guerra Mundial", "from": "Todo lo que debe saber sobre la Segunda Guerra Mundial", "to": "Historia de Rusia en el siglo XX", "weight": 0.4267693693415898}, {"common_terms": "El libro negro", "from": "Todo lo que debe saber sobre la Segunda Guerra Mundial", "to": "El libro negro", "weight": 0.414544414318769}, {"common_terms": "Mitos y falacias de la historia de Espa\u00f1a", "from": "La guerra que gan\u00f3 Franco", "to": "Mitos y falacias de la historia de Espa\u00f1a", "weight": 0.5025370221888541}, {"common_terms": "Historia de Rusia en el siglo XX", "from": "La guerra que gan\u00f3 Franco", "to": "Historia de Rusia en el siglo XX", "weight": 0.4006153268843128}, {"common_terms": "El libro negro de la humanidad", "from": "Historia de Rusia en el siglo XX", "to": "El libro negro de la humanidad", "weight": 0.4167941361059114}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {"edges": {"color": {"inherit": true}, "smooth": false}, "interaction": {"navigationButtons": true}, "physics": {"minVelocity": 0.75, "solver": "repulsion"}};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

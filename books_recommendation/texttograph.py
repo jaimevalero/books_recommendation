@@ -182,7 +182,8 @@ def do_stemmer(df, stop_language='spanish'):
         'voz alta',
         'voz baja',
         ]
-
+    stop_words_generated_tokens = ['abajo', 'abrio', 'alla', 'alta', 'amanecia', 'anterior', 'aqui', 'aren', 'arriba', 'atras', 'aunque', 'año', 'años', 'baja', 'buena', 'caer', 'cambridge', 'can', 'casi', 'cierto', 'cinco', 'comun', 'cosas', 'couldn', 'cuatro', 'cuenta', 'decir', 'dejo', 'demasiado',  'di', 'dia', 'didn', 'diez', 'doesn', 'edad',  'haber', 'habria', 'hacer', 'hacia', 'hadn', 'hasn', 'haven', 'hecho', 'hora', 'hoy', 'iba', 'iii', 'isn', 'let', 'll', 'lugar', 'mayor', 'mañana', 'media', 'mejor', 'meses', 'modo', 'mustn', 'ninguna', 'noche', 'nuevo', 'nunca', 'pag', 'parece', 'parecia', 'parte', 'partido', 'podido', 'podria',  'puerta', 'quiere', 'quiero', 're', 'relato', 'sentido', 'ser', 'seria', 'shan', 'shouldn', 'siempre', 'siguiente', 'sino', 'solo', 'tambien', 'tarde', 'tiempo', 'tras', 'tres', 've', 'vease',  'visto',  'wasn', 'weren', 'won', 'wouldn']
+    stop += stop_words_generated_tokens
     ps = SpanishStemmer()
 
     a=[]
@@ -219,7 +220,8 @@ def get_chart(busqueda,df_distance ,number_elements_primary=5,number_elements_se
             number_elements=number_elements_primary)   
     df_array.append(df_related)
 
-    for title_secondary in df_related['title2'].values: 
+    df_related.columns=["title1","title2","correlation"]
+    for title_secondary in df_related["title2"].values: 
         df_related_secondary = Get_Better_Correlations(
             title_secondary,
             df_distance  , 
@@ -228,7 +230,7 @@ def get_chart(busqueda,df_distance ,number_elements_primary=5,number_elements_se
 
     df_results =pd.concat(df_array)
     G = nx.Graph( )
-
+    df_results['title'] = df_results["title1"]
     for row in df_results.to_dict('records') :
         G.add_node(row['title2'], **{"title": row['title2'] })
         edge_attributes = { "common_terms" : row['title2'] , 'weight' : row['correlation'] } 
@@ -267,30 +269,16 @@ def Display_Interactive_Chart(G):
   network.show("example2.html")
   return network
 
-def main():
-    MAX_FEATURES=225
-    logger.info("Load Data")
-    df = pd.read_csv("/home/jaimevalero/git/books_recommendation/books.csv")
-
-    logger.info("Clean Data")
-    df,stop = do_stemmer(df,stop_language='spanish')
-    df.to_csv("stemmized.csv")
-
-    logger.info("Vectorize Data")
-    df_vectorizado = Get_Vectorizado_TfidfVectorizer(df,stop,max_features=MAX_FEATURES)
-    df_vectorizado.to_csv("vectorized.csv")
-
-    df = pd.read_csv("vectorized.csv")
-
-    logger.info("Generate distance data")
-    df_distance = Get_Distance_Matrix(df_vectorizado)
-    df_distance.to_csv("distances.csv")
-
-
+def debug_graph_creation():
+    df_distance = pd.read_csv("distances.csv",index_col='title')
+    #busqueda='Los Estados Unidos Desde 1816 Hasta La Guerra Civil'
+    busqueda='Taiko'
+    busqueda='División 250'
     busqueda='Los Estados Unidos Desde 1816 Hasta La Guerra Civil'
+    generate_results(busqueda,df_distance)
+
+def generate_results(busqueda,df_distance):
     logger.info(f"search={busqueda}")
-
-
     df_results,G = get_chart(busqueda,
                 df_distance ,
                 number_elements_primary=8,
@@ -298,15 +286,43 @@ def main():
 
     logger.info(f"Display results for {busqueda}")
     network = Display_Interactive_Chart(G)
-
-    df_results
-
-
     network.show("example.html")
+    logger.info(f"Fin")
+
+
+def generate_distances():
+  MAX_FEATURES=225
+  logger.info("Load Data")
+  df = pd.read_csv("/home/jaimevalero/git/books_recommendation/books.csv")
+
+  logger.info("Clean Data")
+  df,stop = do_stemmer(df,stop_language='spanish')
+  df.to_csv("stemmized.csv")
+
+  logger.info("Vectorize Data")
+  df_vectorizado = Get_Vectorizado_TfidfVectorizer(df,stop,max_features=MAX_FEATURES)
+  df_vectorizado.to_csv("vectorized.csv")
+
+  df = pd.read_csv("vectorized.csv")
+
+  logger.info("Generate distance data")
+  df_distance = Get_Distance_Matrix(df_vectorizado)
+  df_distance.to_csv("distances.csv")
+  df_distance = pd.read_csv("distances.csv",index_col='title')
+
+  return df_distance
+
+
+def main():
+    df_distance = generate_distances()
+    busqueda='Los Estados Unidos Desde 1816 Hasta La Guerra Civil'
+    generate_results(busqueda,df_distance)
+
+
 
 if __name__ == '__main__':
    main()
-
+   #debug_graph_creation()
 
 
 
